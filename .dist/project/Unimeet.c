@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "OpenFunction.c"
+#include "OpenFile.c"
 #include "NewFile.c"
+#include "Developers.c"
+#include "ExitAplication.c"
 
 void switchMenu()
 {
