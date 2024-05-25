@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "OpenFunction.c"
+#include "NewFile.c"
 
 void switchMenu()
 {
@@ -21,21 +23,21 @@ void switchMenu()
     switch (menu)
     {
     case 1:
-        printf("Testando resposta switch");
+        OpenFile();
         break;
 
     case 2:
-        printf("Testando resposta switch");
+        NewFile();
         // função para criar o arquivo csv
         break;
 
     case 3:
-        printf("Testando resposta switch");
+        Developers();
         /*função para acessar os desenvolvedores*/
         break;
 
     case 4:
-        printf("Testando resposta switch");
+        ExitAplication();
         /*função para sair da aplicação*/
         break;
 
