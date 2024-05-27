@@ -8,6 +8,7 @@ condicional 'if'.
 */
 #include "OpenFile.c"
 #include "NewFile.c"
+#include "DeleteFile.c"
 #include "Developers.c"
 #include "ExitAplication.c"
 
@@ -15,7 +16,7 @@ condicional 'if'.
 void showMenu()
 {
 
-       // Declarando a variável de opções do switch e inicializando ela com o valor 0.
+    // Declarando a variável de opções do switch e inicializando ela com o valor 0.
     int options = 0;
     // Declarando a variável para o input do dado que será lido nas opções do switch.
     char input[100];
@@ -28,10 +29,11 @@ void showMenu()
 
     printf("++++++++++++++++++++++++++++++\n");
 
-    printf("1) Abrir um arquivo csv.\n");
-    printf("2) Criar um arquivo csv.\n");
-    printf("3) Colaboradores.\n");
-    printf("4) Sair.\n");
+    printf("1) Abrir base de dados.\n");
+    printf("2) Criar base de dados.\n");
+    printf("3) Deletar base de dados.\n");
+    printf("4) Desenvolvedores.\n");
+    printf("5) Sair.\n");
 
     // Utilizando a função fgets e determinando o tamanho dela com o tamanho do valor do input.
     fgets(input, sizeof(input), stdin);
@@ -50,7 +52,7 @@ void showMenu()
     switch (options)
     {
     case 1:
-        printf("teste 01");
+        OpenFile();
 
         break;
 
@@ -60,11 +62,15 @@ void showMenu()
         break;
 
     case 3:
+        DeleteFile();
+        break;
+
+    case 4:
         Developers();
         /*função para acessar os desenvolvedores*/
         break;
 
-    case 4:
+    case 5:
         ExitAplication();
         /*função para sair da aplicação*/
         break;

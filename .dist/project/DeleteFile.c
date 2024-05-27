@@ -1,7 +1,7 @@
 #include "C:\Dev\StructureProgramming\.dist\project\Include\Functions.h"
 #include <stdio.h>
 
-void Developers()
+void DeleteFile()
 {
-    printf("Teste desenvolvedores");
+    printf("Teste para deletar arquivo");
 }
