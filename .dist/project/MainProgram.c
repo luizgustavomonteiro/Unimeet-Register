@@ -57,7 +57,7 @@ void showMenu()
         break;
 
     case 3:
-        // DeleteFile();
+        DeleteFile();
         break;
 
     case 4:

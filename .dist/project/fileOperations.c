@@ -109,3 +109,17 @@ void CreateFile()
     fclose(file);
     printf("Arquivo criado com sucesso\n");
 }
+
+void DeleteFile()
+{
+    const char *filename = "database.csv";
+
+    if (remove(filename) == 0)
+    {
+        printf("Base de dados deletada com sucesso!\n");
+    }
+    else
+    {
+        printf("Erro ao deletar o arquivo!\n");
+    }
+}
