@@ -79,7 +79,6 @@ void showMenu()
 
 int main()
 {
-    setlocale(LC_ALL, "pt_B");
     showMenu();
 
     return 0;

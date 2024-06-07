@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <locale.h>
 #include "fileOperations.h"
 
 void OpenFile()
@@ -19,7 +18,6 @@ void OpenFile()
 
 void CreateFile()
 {
-    setlocale(LC_ALL, "pt_BR");
 
     FILE *file = fopen("database.csv", "w");
     if (file == NULL)
