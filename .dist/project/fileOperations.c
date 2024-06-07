@@ -123,3 +123,17 @@ void DeleteFile()
         printf("Erro ao deletar o arquivo!\n");
     }
 }
+
+void Developers()
+{
+    printf("Universidade São Francisco USF - Campus Itatiba\n");
+    printf("-----------------------------------------------\n");
+    printf("Curso: Programação Estruturada\n");
+    printf("-----------------------------------------------\n");
+    printf("Professor Mentor: Felipe Cavalaro\n");
+    printf("-----------------------------------------------\n");
+    printf("Alunos Desenvolvedores:\n");
+    printf("Bruno Romero Morales\n");
+    printf("Nathalia Lima Veiga\n");
+    printf("Luiz Gustavo Monteiro dos Reis\n");
+}

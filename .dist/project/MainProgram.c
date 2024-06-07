@@ -61,7 +61,7 @@ void showMenu()
         break;
 
     case 4:
-        // Developers();
+        Developers();
         /*função para acessar os desenvolvedores*/
         break;
 
