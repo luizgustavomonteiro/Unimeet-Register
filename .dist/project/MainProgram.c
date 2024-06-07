@@ -66,7 +66,7 @@ void showMenu()
         break;
 
     case 5:
-        // ExitAplication();
+        ExitAplication();
         /*função para sair da aplicação*/
         break;
 

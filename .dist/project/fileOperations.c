@@ -137,3 +137,9 @@ void Developers()
     printf("Nathalia Lima Veiga\n");
     printf("Luiz Gustavo Monteiro dos Reis\n");
 }
+
+void ExitAplication()
+{
+    printf("Encerrando Aplicação...");
+    exit(0);
+}
