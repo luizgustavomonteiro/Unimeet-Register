@@ -24,5 +24,14 @@ typedef struct RegisterUser
 
 void OpenFile();
 void CreateFile();
-
+void DeleteFile();
+void Developers();
+void ExitAplication();
+void readUsers();
+void createUser();
+void updateUser();
+void deleteUser();
+void showMenuUser();
+void promptChoice();
+void promptChoiceUser();
 #endif
