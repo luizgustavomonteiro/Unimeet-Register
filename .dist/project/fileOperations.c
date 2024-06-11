@@ -99,9 +99,7 @@ void CreateFile()
         return;
     }
 
-    fprintf(file, "ID,Nome,Email,DataInicio,Sexo,DataNascimento,AtualSemestre,AnoFormacao\n");
-
-    fclose(file); // Fecha o arquivo após criar o cabeçalho
+        fclose(file); // Fecha o arquivo após criar o cabeçalho
     printf("Arquivo criado com sucesso\n");
 
     CLEAR_SCREEN(); // Limpa a tela

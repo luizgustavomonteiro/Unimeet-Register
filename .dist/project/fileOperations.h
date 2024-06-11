@@ -15,10 +15,10 @@ typedef struct RegisterUser
     char nome[200]; // N é o número de caracteres definidos para registro da informação
     char email[200];
     Data dataInicio;
-    int sexo;            // 0 para masculino ou 1 para feminino
-    Data dataNascimento; // formato YYYYMMDD
+    int sexo; // 0 para feminino ou 1 para masculino
+    Data dataNascimento;
     int atualSemestre;
-    int anoFormacao; // formato YYYYMMDD
+    int anoFormacao;
 } RegisterUser;
 
 void OpenFile();
