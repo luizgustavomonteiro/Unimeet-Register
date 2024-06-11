@@ -10,6 +10,9 @@
 #define CLEAR_SCREEN() system("clear")
 #endif
 
+void verifIDUnique(RegisterUser *user);
+int isIdUnique(int id);
+
 void showMenu()
 {
 
@@ -98,62 +101,12 @@ void CreateFile()
 
     fprintf(file, "ID,Nome,Email,DataInicio,Sexo,DataNascimento,AtualSemestre,AnoFormacao\n");
 
-    char continuar = 'n';
-
-    do
-    {
-        RegisterUser user;
-
-        printf("Digite o ID do usuário: ");
-        scanf("%d", &user.id);
-        getchar(); // Limpa o buffer de entrada
-
-        printf("Digite o nome do usuário: ");
-        fgets(user.nome, sizeof(user.nome), stdin);
-        user.nome[strcspn(user.nome, "\n")] = '\0'; // Remove o '\n' no final
-
-        printf("Digite o email do usuário: ");
-        fgets(user.email, sizeof(user.email), stdin);
-        user.email[strcspn(user.email, "\n")] = '\0'; // Remove o '\n' no final
-
-        printf("Data de início do usuário: (DD MM AAAA) ");
-        scanf("%i %i %i", &user.dataInicio.dia, &user.dataInicio.mes, &user.dataInicio.ano);
-        getchar(); // Limpa o buffer de entrada
-
-        printf("Digite o sexo do usuário (1 para masculino ou 0 para feminino): ");
-        scanf("%i", &user.sexo);
-
-        printf("Data de nascimento do usuário: (DD MM AAAA) ");
-        scanf("%i %i %i", &user.dataNascimento.dia, &user.dataNascimento.mes, &user.dataNascimento.ano);
-        getchar(); // Limpa o buffer de entrada
-
-        printf("Digite o atual semestre do usuário: ");
-        scanf("%i", &user.atualSemestre);
-        getchar(); // Limpa o buffer de entrada
-
-        printf("Digite o ano de formação do usuário: ");
-        scanf("%i", &user.anoFormacao);
-        getchar(); // Limpa o buffer de entrada
-
-        // Escreve os valores no arquivo no formato CSV
-        fprintf(file, "%d,%s,%s,%02d/%02d/%04d,%d,%02d/%02d/%04d,%d,%d\n",
-                user.id, user.nome, user.email,
-                user.dataInicio.dia, user.dataInicio.mes, user.dataInicio.ano,
-                user.sexo,
-                user.dataNascimento.dia, user.dataNascimento.mes, user.dataNascimento.ano,
-                user.atualSemestre, user.anoFormacao);
-
-        printf("Deseja cadastrar mais um usuário? (s/n): ");
-        scanf("%c", &continuar);
-        getchar(); // Limpa o buffer de entrada
-        CLEAR_SCREEN();
-
-    } while (continuar == 's' || continuar == 'S');
-
-    fclose(file);
+    fclose(file); // Fecha o arquivo após criar o cabeçalho
     printf("Arquivo criado com sucesso\n");
-    showMenu();
-    CLEAR_SCREEN();
+
+    CLEAR_SCREEN(); // Limpa a tela
+
+    showMenu(); // Volta ao menu principal
 }
 
 void DeleteFile()
@@ -250,12 +203,19 @@ void readUsers()
     }
 
     char line[500];
+    int isFirstLine = 1; // Variável para verificar se é a primeira linha
+
     printf("ID, Nome, Email, Data de Início, Sexo, Data de Nascimento, Atual Semestre, Ano de Formação\n");
     printf("------------------------------------------------------------------------------------------\n");
 
-    fgets(line, sizeof(line), file); // Ignorar cabeçalho
     while (fgets(line, sizeof(line), file))
     {
+        // Ignorar a primeira linha que é o cabeçalho
+        if (isFirstLine)
+        {
+            isFirstLine = 0;
+            continue;
+        }
         printf("%s", line);
     }
 
@@ -274,9 +234,8 @@ void createUser()
 
     RegisterUser user;
 
-    printf("Digite o ID do usuário: ");
-    scanf("%d", &user.id);
-    getchar();
+    // Verifica a unicidade do ID antes de solicitar as demais informações do usuário
+    verifIDUnique(&user);
 
     printf("Digite o nome do usuário: ");
     fgets(user.nome, sizeof(user.nome), stdin);
@@ -292,6 +251,7 @@ void createUser()
 
     printf("Digite o sexo do usuário (1 para masculino ou 0 para feminino): ");
     scanf("%i", &user.sexo);
+    getchar();
 
     printf("Data de nascimento do usuário (DD MM AAAA): ");
     scanf("%i %i %i", &user.dataNascimento.dia, &user.dataNascimento.mes, &user.dataNascimento.ano);
@@ -305,6 +265,7 @@ void createUser()
     scanf("%i", &user.anoFormacao);
     getchar();
 
+    // Escreve as informações do usuário no arquivo CSV
     fprintf(file, "%d,%s,%s,%02d/%02d/%04d,%d,%02d/%02d/%04d,%d,%d\n",
             user.id, user.nome, user.email,
             user.dataInicio.dia, user.dataInicio.mes, user.dataInicio.ano,
@@ -359,6 +320,8 @@ void updateUser()
         if (user.id == id)
         {
             printf("Usuário encontrado! Insira os novos dados:\n");
+
+            verifIDUnique(&user);
 
             printf("Digite o nome do usuário: ");
             fgets(user.nome, sizeof(user.nome), stdin);
@@ -545,4 +508,45 @@ void promptChoiceUser()
     {
         showMenu();
     }
+}
+
+void verifIDUnique(RegisterUser *user)
+{
+    do
+    {
+        printf("Digite o ID do usuário: ");
+        scanf("%d", &user->id);
+        getchar();
+
+        if (!isIdUnique(user->id))
+        {
+            printf("ID já existe. Por favor, escolha um ID diferente.\n");
+        }
+    } while (!isIdUnique(user->id));
+}
+
+int isIdUnique(int id)
+{
+    FILE *file = fopen("database.csv", "r");
+    if (file == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    char line[500];
+    while (fgets(line, sizeof(line), file))
+    {
+        int existingId;
+        sscanf(line, "%d,", &existingId);
+
+        if (existingId == id)
+        {
+            fclose(file);
+            return 0; // ID não é único
+        }
+    }
+
+    fclose(file);
+    return 1; // ID é único
 }

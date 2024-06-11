@@ -1,6 +1,5 @@
 #ifndef FILE_OPERATIONS
 #define FILE_OPERATIONS
-// #include <stdbool.h>
 
 typedef struct FormatData
 {
@@ -34,4 +33,7 @@ void deleteUser();
 void showMenuUser();
 void promptChoice();
 void promptChoiceUser();
+void verifIDUnique(RegisterUser *user);
+int isIdUnique(int id);
+
 #endif
